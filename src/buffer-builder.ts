@@ -15,6 +15,7 @@ export class BufferBuilder {
 
     this.buffer.write(Command.ESC_init)
     this.resetCharacterCodeTable();
+    this.breakLine()
   }
 
   public end(): BufferBuilder {
