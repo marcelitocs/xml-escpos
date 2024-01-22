@@ -11,7 +11,7 @@ export default class ImageNode extends XMLNode {
 
   public open(bufferBuilder: BufferBuilder): BufferBuilder {
     const img_data = upngjs.decode(
-      Buffer.from(this.content.replace(/&#x2F/g, '/'), 'base64'),
+      Buffer.from(this.content.replace(/&#x2F;/g, '/').replace(/&#x3D;/g, '='), 'base64'),
     );
 
     const pixels = ndarray(
