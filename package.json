@@ -1,5 +1,5 @@
 {
-  "name": "@tillpos/xml-escpos-helper",
+  "name": "xml-escpos",
   "description": "ESC/POS with XML interface",
   "keywords": [
     "escpos",
@@ -21,23 +21,14 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "yarn  clean && yarn  compile",
+    "build": "yarn clean && yarn compile",
     "build:watch": "yarn compile -- -w",
     "clean": "rm -rf ./lib && rm -rf tsconfig.build.tsbuildinfo",
     "compile": "tsc -p ./tsconfig.build.json"
   },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/oolio-group/xml-escpos-helper.git"
-  },
-  "contributors": [
-    "Snehit Velma <snehithvelma@gmail.com>"
-  ],
-  "bugs": {
-    "url": "https://github.com/oolio-group/xml-escpos-helper/issues"
-  },
   "dependencies": {
     "buffer": "^6.0.3",
+    "iconv-lite": "^0.6.3",
     "mustache": "^4.1.0",
     "mutable-buffer": "2.0.3",
     "ndarray": "^1.0.19",

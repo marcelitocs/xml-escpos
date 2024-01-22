@@ -1,16 +1,19 @@
 import { Command } from "./command";
 import { MutableBuffer } from "mutable-buffer";
+import iconv from "iconv-lite";
 import Image from "./image";
 export class BufferBuilder {
   private buffer: MutableBuffer;
   private hasGSCommand: boolean;
   private doEmphasise: boolean;
+  private encode: string;
 
   constructor(private defaultSettings: boolean = true) {
     this.buffer = new MutableBuffer();
     this.hasGSCommand = true;
     this.doEmphasise = false;
 
+    this.resetCharacterCodeTable();
   }
 
   public end(): BufferBuilder {
@@ -18,7 +21,8 @@ export class BufferBuilder {
   }
 
   public resetCharacterCodeTable(): BufferBuilder {
-    this.buffer.write(Command.ESC_t(0));
+    this.buffer.write(Command.ESC_t(CHARACTER_CODE_TABLE.PC860));
+    this.encode = "cp860";
     return this;
   }
 
@@ -169,7 +173,8 @@ export class BufferBuilder {
   }
 
   public printText(text: string): BufferBuilder {
-    this.buffer.write(text, "utf8");
+    const buffer = iconv.encode(text, this.encode);
+    this.buffer.write(buffer);
     return this;
   }
 
@@ -244,6 +249,16 @@ export enum ALIGNMENT {
   LEFT = 48,
   CENTER = 49,
   RIGHT = 50,
+}
+
+export enum CHARACTER_CODE_TABLE {
+  PC437 = 0,
+  KATAKANA = 1,
+  PC850 = 2,
+  PC860 = 3,
+  PC863 = 4,
+  PC865 = 5,
+  PC866 = 17,
 }
 
 export enum BARCODE_SYSTEM {
