@@ -13,6 +13,7 @@ export class BufferBuilder {
     this.hasGSCommand = true;
     this.doEmphasise = false;
 
+    this.buffer.write(Command.ESC_init)
     this.resetCharacterCodeTable();
   }
 
